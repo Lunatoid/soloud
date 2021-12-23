@@ -162,6 +162,12 @@ typedef void * WaveShaperFilter;
 typedef void * WavStream;
 typedef void * File;
 
+/// CUSTOM
+typedef float (*AudioCollideFunction)(Soloud *, AudioSourceInstance3dData *, int);
+AudioCollider AudioCollider_create(AudioCollideFunction function);
+int AudioSourceInstance3dData_getHandle(AudioSourceInstance3dData* aInstance);
+float* AudioSourceInstance3dData_get3dPosition(AudioSourceInstance3dData* aInstance);
+
 /*
  * Soloud
  */

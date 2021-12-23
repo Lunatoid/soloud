@@ -2991,5 +2991,21 @@ void WavStream_stop(void * aClassPtr)
 	cl->stop();
 }
 
+/// CUSTOM
+
+void* AudioCollider_create(AudioCollideFunction function) {
+    return new AudioCollider(function);
+}
+
+int AudioSourceInstance3dData_getHandle(void* aClassPtr) {
+    AudioSourceInstance3dData * cl = (AudioSourceInstance3dData *)aClassPtr;
+    return cl->mHandle;
+}
+
+float* AudioSourceInstance3dData_get3dPosition(void* aClassPtr) {
+    AudioSourceInstance3dData * cl = (AudioSourceInstance3dData *)aClassPtr;
+    return cl->m3dPosition;
+}
+
 } // extern "C"
 

@@ -34,12 +34,25 @@ namespace SoLoud
 	class AudioSource;	
 	class AudioSourceInstance;
 	class AudioSourceInstance3dData;
+    typedef float (*AudioCollideFunction)(Soloud *, AudioSourceInstance3dData *, int);
 
 	class AudioCollider
 	{
 	public:
+        AudioCollider(AudioCollideFunction function) {
+            collideFunction = function;
+        }
+
 		// Calculate volume multiplier. Assumed to return value between 0 and 1.
-		virtual float collide(Soloud *aSoloud, AudioSourceInstance3dData *aAudioInstance3dData,	int aUserData) = 0;
+		float collide(Soloud *aSoloud, AudioSourceInstance3dData *aAudioInstance3dData,	int aUserData) {
+            if (collideFunction) {
+                return collideFunction(aSoloud, aAudioInstance3dData, aUserData);
+            }
+            return 1.0f;
+        }
+
+    private:
+        AudioCollideFunction collideFunction;
 	};
 
 	class AudioAttenuator
